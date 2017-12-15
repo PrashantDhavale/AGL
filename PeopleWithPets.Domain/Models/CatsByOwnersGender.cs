@@ -7,21 +7,9 @@ namespace PeopleWithPets.Domain.Models
         private readonly string _ownersGender;
         private readonly string _catsName;
 
-        public string OwnersGender
-        {
-            get
-            {
-                return _ownersGender;
-            }
-        }
+        public string OwnersGender        {            get            {                return _ownersGender;            }        }
 
-        public string CatsName
-        {
-            get
-            {
-                return _catsName;
-            }
-        }
+        public string CatsName        {            get            {                return _catsName;            }        }
 
         public CatsByOwnersGender(string ownersGender, string catsName)
         {
