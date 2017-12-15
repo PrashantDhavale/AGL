@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace PeopleWithPets.DataAccess.Repository
 {
-    public class WebClientPeopleWithPetsRepository : Domain.Repository.PeopleWithPetsRepository
+    public class HttpClientPeopleWithPetsRepository : Domain.Repository.PeopleWithPetsRepository
     {
         private readonly string _serviceEndPoint;
 
-        public WebClientPeopleWithPetsRepository(string serviceEndPoint)
+        public HttpClientPeopleWithPetsRepository(string serviceEndPoint)
         {
             if(string.IsNullOrEmpty(serviceEndPoint))  
             {
