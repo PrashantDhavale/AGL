@@ -4,24 +4,11 @@ body{
     padding-top: 30px;
     font-family: 'Segoe UI'
 }
-
-.section-nav {
-    padding-left: 0;
-}
 li {
     display: list-item;
     text-align: -webkit-match-parent;
 }
-.toc-entry {
-    display: block;
-}
-
 ul {
     display: block;
     list-style-type: disc;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    -webkit-padding-start: 40px;
 }
