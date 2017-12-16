@@ -14,10 +14,10 @@ namespace PeopleWithPets.Domain.Models
 
         public CatsWithOwnersGender(PersonGender ownersGender, string catsName)
         {
-            if (string.IsNullOrEmpty(catsName))
-            {
-                throw new ArgumentNullException(nameof(catsName));
-            }
+            //if (string.IsNullOrEmpty(catsName))
+            //{
+            //    throw new ArgumentNullException(nameof(catsName));
+            //}
 
             _ownersGender = ownersGender;
             _catsName = catsName;

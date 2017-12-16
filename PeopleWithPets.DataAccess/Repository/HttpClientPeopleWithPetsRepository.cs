@@ -5,53 +5,60 @@ using System.Threading.Tasks;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using PeopleWithPets.DataAccess.Settings;
 
 namespace PeopleWithPets.DataAccess.Repository
 {
     public class HttpClientPeopleWithPetsRepository : Domain.Repository.PeopleWithPetsRepository
     {
-        private readonly string _serviceEndPoint;
-        private List<Domain.Models.Person> _persons;
+        private readonly IOptions<RepositorySettings> _settings;
 
-        public HttpClientPeopleWithPetsRepository(string serviceEndPoint)
+        public HttpClientPeopleWithPetsRepository(IOptions<RepositorySettings> settings)
         {
-            if (string.IsNullOrEmpty(serviceEndPoint))
-            {
-                throw new ArgumentNullException(nameof(serviceEndPoint));
+            if(settings == null)
+            { 
+                throw new ArgumentNullException(nameof(settings));
             }
 
-            _serviceEndPoint = serviceEndPoint;
-            LoadHttpClientData(_serviceEndPoint);
+            _settings = settings;
         }
 
         public override IEnumerable<Domain.Models.CatsWithOwnersGender> GetAllCatsWithOwnersGender()
         {
-            if (_persons == null)
+            var persons = LoadHttpClientData(_settings.Value.ServiceEndPoint);
+
+            if (persons == null)
                 return null;
 
-            var result = (
-                            from person in _persons
-                            from pet in person.Pets.DefaultIfEmpty()
-                            where pet.Type == Domain.Enums.PetType.Cat
-                            select
-                            new Domain.Models.CatsWithOwnersGender(person.Gender, pet.Name)
-                          ).AsEnumerable();
+            var query = from person in persons.Result
+                        from pet in person.Pets.Where(p => p.Type == Domain.Enums.PetType.Cat).DefaultIfEmpty()
+                        select new Domain.Models.CatsWithOwnersGender(person.Gender, pet?.Name);
 
-            return result;
+            return query.Where(c => c.CatsName != null).OrderBy(petsName => petsName.CatsName);
         }
 
-        private async void LoadHttpClientData(string baseUrl)
+        private async Task<List<Domain.Models.Person>> LoadHttpClientData(string baseUrl)
         {
+            List<Domain.Models.Person> persons;
+            var jsonSettings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Include
+            };
+
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             using (HttpResponseMessage res = await client.GetAsync(baseUrl))
             using (HttpContent content = res.Content)
             {
                 string data = await content.ReadAsStringAsync();
-                _persons = !string.IsNullOrEmpty(data)
-                             ? JsonConvert.DeserializeObject<List<Domain.Models.Person>>(data)
+                persons = !string.IsNullOrEmpty(data)
+                             ? JsonConvert.DeserializeObject<List<Domain.Models.Person>>(data, jsonSettings)
                              : default(List<Domain.Models.Person>);
             }
+
+            return persons;
         }
     }
 }

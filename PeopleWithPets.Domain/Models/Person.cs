@@ -16,12 +16,14 @@ namespace PeopleWithPets.Domain.Models
         public int Age { get { return _age; } }
         public List<Pet> Pets { get { return _pets; } }
 
-        public Person(string name, PersonGender gender, int age, List<Pet> pets)
+        public Person(string name, PersonGender gender, int age, List<Pet> pets = default(List<Pet>))
         {
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException(nameof(name));
             }
+            if (pets == null)
+                pets = new List<Pet>();
 
             _name = name;
             _gender = gender;
