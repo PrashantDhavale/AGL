@@ -11,10 +11,10 @@
       <div *ngIf="apiData?.length > 0">
         <div>
           <ul style="list-style-type:none">
-            <li *ngFor="let n of apiData">
-              <h4>{{n.ownersGender}}</h4>
+            <li *ngFor="let item of apiData">
+              <h4>{{item.ownersGender}}</h4>
               <ul style="list-style-type:square">
-                <li *ngFor="let child of n.catNames">{{child}}</li>
+                <li *ngFor="let cat of item.catNames">{{cat}}</li>
               </ul>
             </li>
           </ul>
@@ -29,7 +29,7 @@
     <div class="col-xs-12">
       <br/>
       <div class="alert alert-danger">
-        <strong>Failed! </strong> Please check if the API service is available.
+        <strong>Failed! </strong> Please check if the API is available.
       </div>
     </div>
   </div>
