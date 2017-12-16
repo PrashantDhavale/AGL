@@ -23,6 +23,9 @@ namespace PeopleWithPets.Domain.Models
                 throw new ArgumentNullException(nameof(name));
             }
 
+            if (pets == null)
+                pets = new List<Pet>();
+
             _name = name;
             _gender = gender;
             _age = age;
