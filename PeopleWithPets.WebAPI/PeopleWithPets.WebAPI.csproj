@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Authors>Prashant Dhavale</Authors>
+    <Company />
   </PropertyGroup>
 
   <ItemGroup>
