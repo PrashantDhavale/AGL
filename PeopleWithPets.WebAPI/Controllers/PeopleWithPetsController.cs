@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PeopleWithPets.Domain.Service;
 using PeopleWithPets.Domain.Repository;
@@ -23,10 +21,10 @@ namespace PeopleWithPets.WebAPI.Controllers
         }
         // GET api/values
         [HttpGet]
-        public IEnumerable<Domain.Models.CatsWithOwnersGender> GetPetsGroupedByOwnersGender()
+        public IEnumerable<Domain.Models.CatsGroupedByOwnersGender> GetCatsGroupedByOwnersGender()
         {
             var peopleWithPetsService = new PeopleWithPetsService(_repository);
-            return peopleWithPetsService.GetAllCatsByNameAndOwnersGender();
+            return peopleWithPetsService.GetCatsGroupedByOwnersGender();
         }
     }
 }

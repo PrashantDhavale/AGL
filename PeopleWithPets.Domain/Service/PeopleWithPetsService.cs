@@ -1,7 +1,6 @@
 using System;
 using PeopleWithPets.Domain.Repository;
 using System.Collections.Generic;
-using PeopleWithPets.Domain.Models;
 
 namespace PeopleWithPets.Domain.Service
 {
@@ -18,9 +17,9 @@ namespace PeopleWithPets.Domain.Service
             _repository = repository;
         }
 
-        public IEnumerable<CatsWithOwnersGender> GetAllCatsByNameAndOwnersGender()
+        public IEnumerable<Domain.Models.CatsGroupedByOwnersGender> GetCatsGroupedByOwnersGender()
         {
-            var result = _repository.GetAllCatsWithOwnersGender();
+            var result = _repository.GetCatsGroupedByOwnersGender();
             return result;
         }
     }

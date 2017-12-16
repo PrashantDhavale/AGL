@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Linq;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using PeopleWithPets.DataAccess.Settings;
 
@@ -25,7 +24,7 @@ namespace PeopleWithPets.DataAccess.Repository
             _settings = settings;
         }
 
-        public override IEnumerable<Domain.Models.CatsWithOwnersGender> GetAllCatsWithOwnersGender()
+        public override IEnumerable<Domain.Models.CatsGroupedByOwnersGender> GetCatsGroupedByOwnersGender()
         {
             var persons = LoadHttpClientData(_settings.Value.ServiceEndPoint);
 
@@ -33,10 +32,20 @@ namespace PeopleWithPets.DataAccess.Repository
                 return null;
 
             var query = from person in persons.Result
-                        from pet in person.Pets.Where(p => p.Type == Domain.Enums.PetType.Cat).DefaultIfEmpty()
-                        select new Domain.Models.CatsWithOwnersGender(person.Gender, pet?.Name);
+                        from pet in person.Pets
+                                    .Where(p => p.Type == Domain.Enums.PetType.Cat)
+                                    .OrderBy(o => o.Name).DefaultIfEmpty()
+                        select new
+                        {
+                            Gender = person.Gender,
+                            CatsName = pet?.Name
+                        };
 
-            return query.Where(c => c.CatsName != null).OrderBy(petsName => petsName.CatsName);
+            var grouped = query
+                .Where(c => c.CatsName != null)
+                .GroupBy(g => g.Gender)
+                .Select(s => new Domain.Models.CatsGroupedByOwnersGender(s.Key, s.Select(i => i.CatsName)));
+            return grouped;
         }
 
         private async Task<List<Domain.Models.Person>> LoadHttpClientData(string baseUrl)

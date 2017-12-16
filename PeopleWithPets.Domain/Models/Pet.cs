@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using PeopleWithPets.Domain.Enums;
 
 namespace PeopleWithPets.Domain.Models
