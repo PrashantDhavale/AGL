@@ -11,19 +11,17 @@ namespace PeopleWithPets.Domain.Service
 
         public PeopleWithPetsService(PeopleWithPetsRepository repository)
         {
-            if(repository == null)
+            if (repository == null)
             {
                 throw new ArgumentNullException(nameof(repository));
             }
             _repository = repository;
         }
 
-        public IEnumerable<CatsByOwnersGender> GetAllCatsByOwnersGender()
+        public IEnumerable<CatsWithOwnersGender> GetAllCatsByNameAndOwnersGender()
         {
-            // var result = from catsByOwnersGender in _repository.GetAllCatsByOwnersGender()
-            //      select new CatsByOwnersGender(catsByOwnersGender.);
-            // return result;
-            return null;
+            var result = _repository.GetAllCatsWithOwnersGender();
+            return result;
         }
     }
 }

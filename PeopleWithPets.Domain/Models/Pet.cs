@@ -1,25 +1,22 @@
 using System;
 using System.Collections.Generic;
+using PeopleWithPets.Domain.Enums;
 
 namespace PeopleWithPets.Domain.Models
 {
     public class Pet
     {
         private readonly string _name;
-        private readonly string _type;
+        private readonly PetType _type;
 
-        public string Name {get{return _name;}}
-        public string Type {get{return _type;}}
-        
-        public Pet(string name, string type)
+        public string Name { get { return _name; } }
+        public PetType Type { get { return _type; } }
+
+        public Pet(string name, PetType type)
         {
-            if(string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException(nameof(name));
-            }
-            if(string.IsNullOrEmpty(type))
-            {
-                throw new ArgumentNullException(nameof(type));
             }
 
             _name = name;

@@ -6,6 +6,6 @@ namespace PeopleWithPets.Domain.Repository
 {
     public abstract class PeopleWithPetsRepository
     {
-        public abstract IEnumerable<Domain.Models.CatsByOwnersGender> GetAllCatsByOwnersGender();
+        public abstract IEnumerable<Domain.Models.CatsWithOwnersGender> GetAllCatsWithOwnersGender();
     }
 }

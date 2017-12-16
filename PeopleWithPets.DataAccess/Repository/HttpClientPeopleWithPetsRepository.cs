@@ -15,7 +15,7 @@ namespace PeopleWithPets.DataAccess.Repository
 
         public HttpClientPeopleWithPetsRepository(string serviceEndPoint)
         {
-            if(string.IsNullOrEmpty(serviceEndPoint))  
+            if (string.IsNullOrEmpty(serviceEndPoint))
             {
                 throw new ArgumentNullException(nameof(serviceEndPoint));
             }
@@ -24,17 +24,17 @@ namespace PeopleWithPets.DataAccess.Repository
             LoadHttpClientData(_serviceEndPoint);
         }
 
-        public override IEnumerable<Domain.Models.CatsByOwnersGender> GetAllCatsByOwnersGender()
+        public override IEnumerable<Domain.Models.CatsWithOwnersGender> GetAllCatsWithOwnersGender()
         {
-            if(_persons == null)
+            if (_persons == null)
                 return null;
 
             var result = (
                             from person in _persons
                             from pet in person.Pets.DefaultIfEmpty()
-                            where pet.Type == "Cat"
-                            select 
-                            new Domain.Models.CatsByOwnersGender(person.Gender,pet.Name)
+                            where pet.Type == Domain.Enums.PetType.Cat
+                            select
+                            new Domain.Models.CatsWithOwnersGender(person.Gender, pet.Name)
                           ).AsEnumerable();
 
             return result;
@@ -48,7 +48,7 @@ namespace PeopleWithPets.DataAccess.Repository
             using (HttpContent content = res.Content)
             {
                 string data = await content.ReadAsStringAsync();
-                _persons = !string.IsNullOrEmpty(data) 
+                _persons = !string.IsNullOrEmpty(data)
                              ? JsonConvert.DeserializeObject<List<Domain.Models.Person>>(data)
                              : default(List<Domain.Models.Person>);
             }
