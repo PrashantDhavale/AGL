@@ -22,14 +22,15 @@ A temporary repo for AGL challenge
     Tests
     PeopleWithPets.sln
     README.md
+
+# Build and Test
+
+    Open the sln in Visual Studion 2017
     
-# Build assemblies
-    On the command prompt inside the root folder
-    dotnet build
-    
-# Test assemblies
-    On the command prompt inside the root folder
-    dotnet test
+# Setting up
+
+    1) Set the PeopleWithPets.WebAPI as the Startup project
+    2) Open launch properties and set the App URL to http://localhost:5000/
     
 # Executing the application
 
@@ -37,14 +38,9 @@ A temporary repo for AGL challenge
   
   (a) WebAPI
   
-       a.1) Command prompt -> browse to PeopleWithPets.WebAPI
+       a.1) Execute the application (F5) and in the browser browse http://localhost:5000/api/PeopleWithPets
        
-       a.2) dotnet run
-            This will run the WebAPI and the prompt will display the localhost address where it is listening
-            http://localhost:5000/api/PeopleWithPets
-       
-       a.3) On a web browser browse to http://localhost:5000/api/PeopleWithPets and check if the API is running. 
-            It should return the response as JSON.
+       a.2) Check if the API is running. It should return the response as JSON.
        
   (b) WebUI
   
