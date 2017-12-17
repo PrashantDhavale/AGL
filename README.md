@@ -27,6 +27,10 @@ A temporary repo for AGL challenge
     On the command prompt inside the root folder
     dotnet build
     
+# Test assemblies
+    On the command prompt inside the root folder
+    dotnet test
+    
 # Executing the application
 
   Execution is 2 parts
@@ -36,13 +40,23 @@ A temporary repo for AGL challenge
        a.1) Command prompt -> browse to PeopleWithPets.WebAPI
        
        a.2) dotnet run
+            This will run the WebAPI and the prompt will display the localhost address where it is listening
+            http://localhost:5000/api/PeopleWithPets
+       
+       a.3) On a web browser browse to http://localhost:5000/api/PeopleWithPets and check if the API is running. 
+            It should return the response as JSON.
        
   (b) WebUI
   
        b.1) Command prompt -> browse to PeopleWithPets.WebUI
   
-       b.2) npm install (required only once & this will take some time for downloading assemblies)
+       b.2) npm install (required only once & this will take some time for downloading packages)
        
        b.3) ng build -prod
        
-       b.4) ng serve -open      
+       b.4) ng serve -open
+            This will pop up a new browser and display the default page with a Information button.
+       
+       b.5) Click the Blue information button
+       
+       
