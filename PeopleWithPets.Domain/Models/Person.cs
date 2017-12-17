@@ -4,6 +4,9 @@ using PeopleWithPets.Domain.Enums;
 
 namespace PeopleWithPets.Domain.Models
 {
+    /// <summary>
+    /// POCO type to represent a Person
+    /// </summary>
     public class Person
     {
         private readonly string _name;

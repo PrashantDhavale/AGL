@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using PeopleWithPets.Domain.Service;
 using PeopleWithPets.Domain.Repository;
@@ -13,10 +12,15 @@ namespace PeopleWithPets.WebAPI.Controllers
         private readonly PeopleWithPetsRepository _repository;
         private readonly ILogger<PeopleWithPetsController> _logger;
 
-
+        /// <summary>
+        /// Constructor with dependency 
+        /// This is inverting the dependency so that the StartUp class manages the instantiation(IOC).
+        /// </summary>
+        /// <param name="repository">The repository</param>
+        /// <param name="logger">An ILogger to log to configured sink</param>
         public PeopleWithPetsController(PeopleWithPetsRepository repository, ILogger<PeopleWithPetsController> logger)
         {
-            if(repository == null)
+            if (repository == null)
             {
                 throw new ArgumentNullException(nameof(repository));
             }
@@ -25,10 +29,15 @@ namespace PeopleWithPets.WebAPI.Controllers
                 throw new ArgumentNullException(nameof(logger));
             }
 
-            _repository =repository;
+            _repository = repository;
             _logger = logger;
         }
-        // GET api/values
+
+        /// <summary>
+        /// Get all the cats ordered alphabetically by their name and grouped by its owners gender.
+        /// </summary>
+        /// <response code="200">Successful operation</response>
+        /// <response code="500">Internal server error</response>
         [HttpGet]
         public ActionResult GetCatsGroupedByOwnersGender()
         {
@@ -40,7 +49,7 @@ namespace PeopleWithPets.WebAPI.Controllers
                     var peopleWithPetsService = new PeopleWithPetsService(_repository);
                     return Ok(peopleWithPetsService.GetCatsGroupedByOwnersGender());
                 }
-                return BadRequest(ModelState);
+                return BadRequest(new { Reason = "Error Occurred" });
             }
             catch (Exception)
             {

@@ -10,10 +10,20 @@ using PeopleWithPets.DataAccess.Settings;
 
 namespace PeopleWithPets.DataAccess.Repository
 {
+    /// <summary>
+    /// Type to implement repository
+    /// </summary>
     public class HttpClientPeopleWithPetsRepository : Domain.Repository.PeopleWithPetsRepository
     {
+        /// <summary>
+        /// IOptions to get the dependant settings
+        /// </summary>
         private readonly IOptions<RepositorySettings> _settings;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="settings">An IOption RepositorySetting that contains the serice end point</param>
         public HttpClientPeopleWithPetsRepository(IOptions<RepositorySettings> settings)
         {
             if(settings == null)
@@ -24,6 +34,10 @@ namespace PeopleWithPets.DataAccess.Repository
             _settings = settings;
         }
 
+        /// <summary>
+        /// Method to Load the HttpClient data containing the people and pets information.
+        /// </summary>
+        /// <returns>All cats ordered by name and grouped by owners gender</returns>
         public override IEnumerable<Domain.Models.CatsGroupedByOwnersGender> GetCatsGroupedByOwnersGender()
         {
             var persons = LoadHttpClientData(_settings.Value.ServiceEndPoint);
@@ -31,6 +45,8 @@ namespace PeopleWithPets.DataAccess.Repository
             if (persons == null)
                 return null;
 
+            // Get all pets of type Cat
+            // Create an anonymous type containing owners gender and Cats name
             var query = from person in persons.Result
                         from pet in person.Pets
                                     .Where(p => p.Type == Domain.Enums.PetType.Cat)
@@ -41,10 +57,12 @@ namespace PeopleWithPets.DataAccess.Repository
                             CatsName = pet?.Name
                         };
 
+            // Group the result by owners gender and filter null ones.
             var grouped = query
                 .Where(c => c.CatsName != null)
                 .GroupBy(g => g.Gender)
                 .Select(s => new Domain.Models.CatsGroupedByOwnersGender(s.Key, s.Select(i => i.CatsName)));
+
             return grouped;
         }
 
@@ -61,11 +79,12 @@ namespace PeopleWithPets.DataAccess.Repository
             using (HttpResponseMessage res = await client.GetAsync(baseUrl))
             using (HttpContent content = res.Content)
             {
+                //Read the data as string and deserialize into list of Person model
                 string data = await content.ReadAsStringAsync();
                 persons = !string.IsNullOrEmpty(data)
                              ? JsonConvert.DeserializeObject<List<Domain.Models.Person>>(data, jsonSettings)
                              : default(List<Domain.Models.Person>);
-            }
+            } //dispose
 
             return persons;
         }
