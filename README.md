@@ -29,12 +29,20 @@ A temporary repo for AGL challenge
     
 # Executing the application
 
-  - Execution is 2 parts
+  Execution is 2 parts
+  
   (a) WebAPI
+  
        a.1) Command prompt -> browse to PeopleWithPets.WebAPI
+       
        a.2) dotnet run
+       
   (b) WebUI
+  
        b.1) Command prompt -> browse to PeopleWithPets.WebUI
+  
        b.2) npm install (required only once & this will take some time for downloading assemblies)
+       
        b.3) ng build -prod
+       
        b.4) ng serve -open      
