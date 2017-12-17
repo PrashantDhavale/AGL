@@ -25,12 +25,13 @@ A temporary repo for AGL challenge
 
 # Build and Test
 
-    Open the sln in Visual Studion 2017
+    Open the .sln in Visual Studion 2017
+    Compile it. The tests should execute automatically. If not please use the Test runner.
     
 # Setting up
 
     1) Set the PeopleWithPets.WebAPI as the Startup project
-    2) Open launch properties and set the App URL to http://localhost:5000/
+    2) IMPORTANT: Open launch properties and set the App URL to http://localhost:5000/
     
 # Executing the application
 
