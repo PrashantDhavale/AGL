@@ -25,7 +25,7 @@ A temporary repo for AGL challenge
 
 # Build and Test
 
-    Open the .sln in Visual Studion 2017
+    Open the .sln in Visual Studio 2017
     Compile it. The tests should execute automatically. If not then please use the Test runner.
     
 # Setting up
