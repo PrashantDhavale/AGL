@@ -33,6 +33,11 @@ A temporary repo for AGL challenge
     1) Set the PeopleWithPets.WebAPI as the Startup project
     2) IMPORTANT: Open launch properties and set the App URL to http://localhost:5000/
     
+    NOTE: On the local settings the WebAPI should execute on port 5000.
+          If you choose any other port, then you need to open up the 
+          PeopleWithPets.WebUI\src\environments\environment.*.ts files and 
+          set the peopleWithPetsAPI value to use the port of your choice
+    
 # Executing the application
 
   Execution is 2 parts
