@@ -55,6 +55,7 @@ namespace PeopleWithPets.WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            
             app.UseCors("AllowSpecificOrigin");
             app.UseMvc();
         }
