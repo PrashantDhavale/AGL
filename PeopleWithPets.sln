@@ -8,6 +8,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeopleWithPets.DataAccess",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeopleWithPets.WebAPI", "PeopleWithPets.WebAPI\PeopleWithPets.WebAPI.csproj", "{34CBADFF-B00E-4405-8E49-FD8EC44FCFA7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{57C84ACF-0DFB-43BF-A85D-34BA597F5C6B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeopleWithPets.WebAPI.Tests", "Tests\PeopleWithPets.WebAPI.Tests\PeopleWithPets.WebAPI.Tests.csproj", "{8E5F17C2-65BC-4313-894C-703CF32F681F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,9 +58,24 @@ Global
 		{34CBADFF-B00E-4405-8E49-FD8EC44FCFA7}.Release|x64.Build.0 = Release|Any CPU
 		{34CBADFF-B00E-4405-8E49-FD8EC44FCFA7}.Release|x86.ActiveCfg = Release|Any CPU
 		{34CBADFF-B00E-4405-8E49-FD8EC44FCFA7}.Release|x86.Build.0 = Release|Any CPU
+		{8E5F17C2-65BC-4313-894C-703CF32F681F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E5F17C2-65BC-4313-894C-703CF32F681F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E5F17C2-65BC-4313-894C-703CF32F681F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8E5F17C2-65BC-4313-894C-703CF32F681F}.Debug|x64.Build.0 = Debug|Any CPU
+		{8E5F17C2-65BC-4313-894C-703CF32F681F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8E5F17C2-65BC-4313-894C-703CF32F681F}.Debug|x86.Build.0 = Debug|Any CPU
+		{8E5F17C2-65BC-4313-894C-703CF32F681F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E5F17C2-65BC-4313-894C-703CF32F681F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E5F17C2-65BC-4313-894C-703CF32F681F}.Release|x64.ActiveCfg = Release|Any CPU
+		{8E5F17C2-65BC-4313-894C-703CF32F681F}.Release|x64.Build.0 = Release|Any CPU
+		{8E5F17C2-65BC-4313-894C-703CF32F681F}.Release|x86.ActiveCfg = Release|Any CPU
+		{8E5F17C2-65BC-4313-894C-703CF32F681F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8E5F17C2-65BC-4313-894C-703CF32F681F} = {57C84ACF-0DFB-43BF-A85D-34BA597F5C6B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F58E24F-2E7E-4358-A2B0-33CB7D619B30}
